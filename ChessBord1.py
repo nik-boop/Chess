@@ -61,8 +61,6 @@ class Gex(Base):
             for j in range(n - abs(i)):
                 cr_ = Coord(Base.x + i * 1.5 * r, int(Base.y + j *3 ** 0.5 * r + abs(i) * 3 ** 0.5 / 2 * r))
                 self.draw.polygon(xy=cr_.xy(), outline=(0, 0, 0), fill=(255 // ((j - abs(i)) % 3 + 1), 0, 255 // ((j - abs(i)) % 3 + 1)))
-#fill=(255 // ((j - abs(i)) % 3 + 1), 0, 255 // ((j - abs(i)) % 3 + 1))
-
 gex = Gex()
 # gex.one_gex()
 gex.pole()
