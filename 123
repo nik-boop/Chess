@@ -1,0 +1,142 @@
+
+
+class move:
+    bord = {(0, 0, 5): '-', (0, 1, 6): '-', (0, 2, 7): '-', (0, 3, 8): '-', (0, 4, 9): '-', (0, 5, 10): '-',
+(1, 0, 4): '-', (1, 1, 5): '-', (1, 2, 6): '-', (1, 3, 7): '-', (1, 4, 8): '-', (1, 5, 9): '-', (1, 6, 10): '-',
+(2, 0, 3): '-', (2, 1, 4): '-', (2, 2, 5): '-', (2, 3, 6): '-', (2, 4, 7): '-', (2, 5, 8): '-', (2, 6, 9): '-', (2, 7, 10): '-',
+(3, 0, 2): '-', (3, 1, 3): '-', (3, 2, 4): '-', (3, 3, 5): '-', (3, 4, 6): '-', (3, 5, 7): '-', (3, 6, 8): '-', (3, 7, 9): '-', (3, 8, 10): '-',
+(4, 0, 1): '-', (4, 1, 2): '-', (4, 2, 3): '-', (4, 3, 4): '-', (4, 4, 5): '-', (4, 5, 6): '-', (4, 6, 7): '-', (4, 7, 8): '-', (4, 8, 9): '-', (4, 9, 10): '-',
+(5, 0, 0):'-',(5, 1, 1):'-',(5, 2, 2):'-',(5, 3, 3):'-',(5, 4, 4):'-',(5, 5, 5):'-',(5, 6, 6):'-',(5, 7, 7):'-',(5, 8, 8):'-',(5, 9, 9):'-',(5, 10, 10):'-',
+(6, 1, 0):'-',(6, 2, 1):'-',(6, 3, 2):'-',(6, 4, 3):'-',(6, 5, 4):'-',(6, 6, 5):'-',(6, 7, 6):'-',(6, 8, 7):'-',(6, 9, 8):'-',(6, 10, 9):'-',
+(7, 2, 0):'-',(7, 3, 1):'-',(7, 4, 2):'-',(7, 5, 3):'-',(7, 6, 4):'-',(7, 7, 5):'-',(7, 8, 6):'-',(7, 9, 7):'-',(7, 10, 8):'-',
+(8, 3, 0):'-',(8, 4, 1):'-',(8, 5, 2):'-',(8, 6, 3):'-',(8, 7, 4):'-',(8, 8, 5):'-',(8, 9, 6):'-',(8, 10, 7):'-',
+(9, 4, 0):'-',(9, 5, 1):'-',(9, 6, 2):'-',(9, 7, 3):'-',(9, 8, 4):'-',(9, 9, 5):'-',(9, 10, 6):'-',
+(10, 5, 0):'-',(10, 6, 1):'-',(10, 7, 2):'-',(10, 8, 3):'-',(10, 9, 4):'-',(10, 10, 5):'-'}
+    def __init__(self):
+
+        pass
+
+    def chekpos(self,p):
+        if self.bord.get(p) == '-':
+            self.psm.append(p)
+            return 1
+            '''elif bord.get([p[0], p[1], p[2]]) == 'Kb' or 'Kw':
+            self.check = 1
+            return "check"
+        elif bord.get([p[0],p[1],p[2]]).sid() != chman.sid():
+            self.psm.append([p[0], p[1], p[2]])
+            self.eda.append([p[0],p[1],p[2]])
+            return 0
+        elif bord.get([p[0],p[1],p[2]]).sid() == chman.sid():
+            return 0'''
+        else:
+            return 0
+
+    def checkmv(self,p=[5,5,5],taypmv="D", lim = 10):
+        #chman.name()
+        #chman.pos()
+        #chman.taypmv()
+        #chman.lim()
+        #
+        print(taypmv)
+        self.psm = list()
+        self.eda = list()
+        check = 0
+        # P - Движение по прямой
+        # D - По диагонали
+        # PD - Королева король
+        # H - Коннь
+        # p - Пешка
+        if taypmv == "P" or taypmv == 'PD':
+            # Поперек Left справа налево
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]+i,p[1]+i,p[2])) == 1: pass
+                else: break
+            # Поперек Left слева направо
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]-i,p[1]-i,p[2])) == 1: pass
+                else: break
+            # Поперек right справа налево
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]+i,p[1],p[2]-i)) == 1: pass
+                else: break
+            # Поперек right слева направо
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]-i,p[1],p[2]+i)) == 1: pass
+                else: break
+            # По x вверх
+            for i in range(1,lim+1):
+                if self.chekpos((p[0],p[1]+i,p[2]+i)) == 1: pass
+                else: break
+            # По x вниз
+            for i in range(1,lim+1):
+                if self.chekpos((p[0],p[1]-i,p[2]-i)) == 1: pass
+                else: break
+        if taypmv == "D" or taypmv == "PD":
+            #Вправо вверх
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]+i,p[1]+2*i,p[2]+i)) == 1: pass
+                else: break
+            #Вправо вниз
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]+i,p[1]-i,p[2]-i*2)) == 1: pass
+                else: break
+            #Влево вверх
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]-i,p[1]+i,p[2]+i*2)) == 1: pass
+                else: break
+            #Влево вниз
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]-i,p[1]-i*2,p[2]-i)) == 1: pass
+                else: break
+            #Вправо
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]+i*2,p[1]+i,p[2]-i)) == 1: pass
+                else: break
+            #Влево
+            for i in range(1,lim+1):
+                if self.chekpos((p[0]-i*2,p[1]-i,p[2]+i)) == 1: pass
+                else: break
+        if taypmv == "H":
+            self.chekpos((p[0]+1, p[1]-2, p[2]-3))
+            self.chekpos((p[0]+2, p[1]-1, p[2]-3))
+            self.chekpos((p[0]-2, p[1]-3, p[2]-1))
+            self.chekpos((p[0]-1, p[1]-3, p[2]-2))
+            self.chekpos((p[0]-3, p[1]-1, p[2]+2))
+            self.chekpos((p[0]-3, p[1]-2, p[2]+1))
+            self.chekpos((p[0]-2, p[1]+1, p[2]+3))
+            self.chekpos((p[0]-1, p[1]+2, p[2]+3))
+            self.chekpos((p[0]+1, p[1]+3, p[2]+2))
+            self.chekpos((p[0]+2, p[1]+3, p[2]+1))
+            self.chekpos((p[0]+3, p[1]+2, p[2]-1))
+            self.chekpos((p[0]+3, p[1]-1, p[2]-2))
+        if taypmv == "p":
+            if chman.name[2] == "w":
+                if self.bord.get((p[1],p[2]+1,p[3]+1)) == '-':
+                    self.psm.append((p[1], p[2] + 1, p[3] + 1))
+                    if chman.f1 == 1 and self.bord.get((p[1],p[2]+2,p[3]+2)) == '-':
+                        self.psm.append((p[1],p[2]+2,p[3]+2))
+                if self.bord.get((p[1]-1,p[2],p[3]+1)).sid() != chman.sid():
+                    self.eda.append((p[1]-1,p[2],p[3]+1))
+                    self.psm.append((p[1]-1,p[2],p[3]+1))
+                if self.bord.get((p[1]+1,p[2]+1,p[3])).sid() != chman.sid():
+                    self.eda.append((p[1]+1,p[2]+1,p[3]))
+                    self.psm.append((p[1]+1,p[2]+1,p[3]))
+            else:
+                if self.bord.get((p[1],p[2]-1,p[3]-1)) == '-':
+                    self.psm.append((p[1],p[2]-1,p[3]-1))
+                    if chman.f1 == 1 and self.bord.get((p[1],p[2]-2,p[3]-2)) == '-':
+                        self.psm.append((p[1],p[2]-2,p[3]-2))
+                if self.bord.get((p[1]-1,p[2]-1,p[3])).sid() != chman.sid():
+                    self.eda.append((p[1]-1,p[2]-1,p[3]))
+                    self.psm.append((p[1]-1,p[2]-1,p[3]))
+                if self.bord.get((p[1]+1, p[2], p[3]-1)).sid() != chman.sid():
+                    self.eda.append((p[1]+1,p[2],p[3]-1))
+                    self.psm.append((p[1]+1,p[2],p[3]-1))
+
+        return self.psm, self.eda
+
+a = move()
+print(a.checkmv())
+
+
